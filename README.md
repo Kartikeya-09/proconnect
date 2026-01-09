@@ -1,36 +1,82 @@
-# ProConnect 🌐
+# ProConnect 🚀
 
-A LinkedIn-inspired professional networking platform clone developed to understand and implement real-world web application features. This project focuses on creating a scalable, responsive, and user-friendly interface similar to LinkedIn while following modern development best practices.
+A LinkedIn-inspired professional networking platform built with the MERN stack, enabling professionals to connect, share, and grow their careers.
 
-## 📋 Overview
+## 🛠️ Tech Stack
 
-ProConnect is a comprehensive professional networking platform that replicates core LinkedIn functionalities. Built with modern web technologies, this project serves as a learning platform for understanding complex web application architecture, user authentication, real-time updates, and responsive design principles.
+**ProConnect** is built using the **MERN Stack**:
+
+- **MongoDB** - NoSQL database for storing user data, posts, connections, and more
+- **Express.js** - Backend web application framework for building RESTful APIs
+- **React** - Frontend library for building interactive user interfaces
+- **Next.js** - React framework used for server-side rendering, routing, and optimization
+
+### Key Technologies
+- **Next.js Routing** - File-based routing system for seamless navigation
+- **Node.js** - JavaScript runtime environment
+- **JWT** - JSON Web Tokens for authentication
+- **Mongoose** - MongoDB object modeling
+- **TailwindCSS** - Utility-first CSS framework (optional)
+
+---
 
 ## ✨ Features
 
-- **User Profiles**: Create and customize professional profiles with work experience, education, and skills
-- **Connections**: Send, accept, and manage connection requests
-- **Feed**: Browse and interact with posts from your network
-- **Messaging**: Real-time messaging system for professional communication
-- **Job Listings**: Browse and apply for job opportunities
-- **Notifications**: Stay updated with connection requests, messages, and interactions
-- **Responsive Design**: Fully responsive interface that works seamlessly across devices
+### Core Functionality
+- 🔐 **User Authentication & Authorization**
+  - Secure signup and login with JWT
+  - Password encryption and validation
+  - Session management
 
-## 🛠️ Technologies Used
+- 👤 **User Profiles**
+  - Create and customize professional profiles
+  - Add work experience, education, and skills
+  - Upload profile pictures and banners
+  - Display endorsements and recommendations
 
-- **JavaScript** (71.9%) - Core application logic and interactivity
-- **CSS** (28.1%) - Styling and responsive design
-- **HTML** - Structure and markup
+- 🤝 **Networking**
+  - Send and accept connection requests
+  - View and manage your professional network
+  - Suggested connections based on interests
 
-## 🚀 Getting Started
+- 📝 **Posts & Feed**
+  - Create, edit, and delete posts
+  - Like and comment on posts
+  - Personalized feed based on connections
+  - Share articles, images, and updates
 
-### Prerequisites
+- 💬 **Messaging**
+  - Real-time chat with connections
+  - Send and receive messages
+  - Message notifications
 
-- A modern web browser (Chrome, Firefox, Safari, or Edge)
-- Basic understanding of HTML, CSS, and JavaScript
+- 🔍 **Search & Discovery**
+  - Search for users by name, skills, or company
+  - Advanced filtering options
+  - Discover new professionals in your field
 
-### Installation
+- 🔔 **Notifications**
+  - Real-time notifications for connection requests
+  - Post interactions (likes, comments)
+  - Message alerts
 
-1. Clone the repository:
+---
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v16 or higher) - [Download](https://nodejs.org/)
+- **npm** or **yarn** - Package manager
+- **MongoDB** - [Download](https://www.mongodb.com/try/download/community) or use MongoDB Atlas
+- **Git** - Version control
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Kartikeya-09/proconnect.git
+cd proconnect
