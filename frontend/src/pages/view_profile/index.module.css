@@ -1,0 +1,317 @@
+.container{
+    padding: 1.3rem;
+    background: rgb(247, 243, 243);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.backDropContainer{
+    width:100%;
+    height: 35vh;
+    background: url("https://t4.ftcdn.net/jpg/06/31/31/59/360_F_631315988_31FMZC4kDYijIJzsxNQivlot4GeHow.jpg") ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 20px;
+}
+.backDropContainer > img {
+    width :8em;
+    height: 8em;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30%;
+    left: 8%;
+    text-align: center;
+}
+.profileContainer_details{
+    padding-top:4.4rem;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.card__ProfileContainer{
+    margin-top: 1rem;
+    display: flex;
+}
+
+.card__ProfileContainer > img{
+    width: 3.4rem;
+    height: auto;
+    height: 3.4rem;
+    object-fit: cover;
+    
+}
+
+.connectBtn{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: rgba(3,93,183,0.905);
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.connectedButton{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: grey;
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.workHistoryContainer{
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 1.4rem;
+    width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.workHistoryCard{   
+    min-height: fit-content;
+    padding-inline: 2.5rem;
+    padding-block: 1rem;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgb(173,173,173);
+}
+
+/* Tablet Responsive - screens under 1024px */
+@media screen and (max-width: 1024px) {
+    .container{
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .backDropContainer{
+        height: 30vh;
+    }
+    
+    .backDropContainer > img{
+        width: 7em;
+        height: 7em;
+        bottom: -25%;
+        left: 6%;
+    }
+    
+    .profileContainer_details{
+        padding-top: 3.5rem;
+    }
+    
+    .workHistoryContainer{
+        gap: 1rem;
+        padding-top: 1rem;
+    }
+    
+    .workHistoryCard{
+        padding-inline: 1.8rem;
+        padding-block: 0.8rem;
+        box-shadow: 8px 8px 12px rgb(173,173,173);
+    }
+}
+
+/* Small Tablet - screens under 768px */
+@media screen and (max-width: 768px) {
+    .container{
+        padding: 0.8rem;
+        gap: 0.8rem;
+    }
+    
+    .backDropContainer{
+        height: 25vh;
+    }
+    
+    .backDropContainer > img{
+        width: 6em;
+        height: 6em;
+        bottom: -20%;
+        left: 5%;
+    }
+    
+    .profileContainer_details{
+        padding-top: 3rem;
+    }
+    
+    .profileContainer_details > div {
+        flex-direction: column !important;
+    }
+    
+    .profileContainer_details > div > div {
+        flex: 1 !important;
+    }
+    
+    .card{
+        gap: 1rem;
+    }
+    
+    .card__ProfileContainer > img{
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    .workHistoryContainer{
+        flex-direction: column;
+        gap: 0.8rem;
+        padding-top: 0.8rem;
+    }
+    
+    .workHistoryCard{
+        padding-inline: 1.5rem;
+        padding-block: 0.6rem;
+        box-shadow: 6px 6px 10px rgb(173,173,173);
+    }
+    
+    .connectBtn,
+    .connectedButton{
+        padding-inline: 0.6rem;
+        padding-block: 0.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile/Tablet Landscape - screens around 600px */
+@media screen and (max-width: 600px) {
+    .container{
+        padding: 0.6rem;
+        gap: 0.6rem;
+    }
+    
+    .backDropContainer{
+        height: 22vh;
+        border-radius: 15px;
+    }
+    
+    .backDropContainer > img{
+        width: 5.5em;
+        height: 5.5em;
+        bottom: -18%;
+        left: 4%;
+    }
+    
+    .profileContainer_details{
+        padding-top: 2.5rem;
+    }
+    
+    .profileContainer_details > div {
+        flex-direction: column !important;
+    }
+    
+    .profileContainer_details > div > div {
+        flex: 1 !important;
+        width: 100% !important;
+    }
+    
+    .card{
+        gap: 0.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .card__ProfileContainer{
+        margin-top: 0.5rem;
+        gap: 0.8rem;
+    }
+    
+    .card__ProfileContainer > img{
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+    
+    .workHistoryContainer{
+        flex-direction: column;
+        gap: 0.6rem;
+        padding-top: 0.6rem;
+    }
+    
+    .workHistoryCard{
+        padding-inline: 1.2rem;
+        padding-block: 0.5rem;
+        box-shadow: 4px 4px 8px rgb(173,173,173);
+    }
+    
+    .connectBtn,
+    .connectedButton{
+        padding-inline: 0.5rem;
+        padding-block: 0.2rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile Portrait - screens under 480px */
+@media screen and (max-width: 480px) {
+    .container{
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .backDropContainer{
+        height: 20vh;
+        border-radius: 12px;
+    }
+    
+    .backDropContainer > img{
+        width: 5em;
+        height: 5em;
+        bottom: -15%;
+        left: 3%;
+    }
+    
+    .profileContainer_details{
+        padding-top: 2.2rem;
+    }
+    
+    .profileContainer_details > div {
+        flex-direction: column !important;
+    }
+    
+    .profileContainer_details > div > div {
+        flex: 1 !important;
+        width: 100% !important;
+    }
+    
+    .card{
+        gap: 0.6rem;
+        align-items: flex-start;
+    }
+    
+    .card__ProfileContainer{
+        margin-top: 0.3rem;
+        gap: 0.6rem;
+    }
+    
+    .card__ProfileContainer > img{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .workHistoryContainer{
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+    }
+    
+    .workHistoryCard{
+        padding-inline: 1rem;
+        padding-block: 0.4rem;
+        box-shadow: 3px 3px 6px rgb(173,173,173);
+        min-height: auto;
+    }
+    
+    .connectBtn,
+    .connectedButton{
+        padding-inline: 0.4rem;
+        padding-block: 0.15rem;
+        font-size: 0.8rem;
+    }
+}

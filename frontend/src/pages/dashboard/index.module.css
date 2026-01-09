@@ -1,0 +1,581 @@
+.scrollComponent{
+    
+    justify-content: center;
+}
+
+.createPostContainer {
+    display: flex;
+    height: 10svh;
+    width: 100%;
+    padding-inline: 0.8rem;
+    gap: 1.3rem;
+    position: relative;
+    align-items: center;
+    background: rgb(243, 232, 232);
+    border-radius: 20px;
+}
+
+.userProfile{
+    border-radius: 100%;
+    height:60%;
+    width: fit-content;
+
+
+}
+
+.createPostContainer >  textarea{
+    width: 100%;
+}
+
+.Fab{
+    background: rgba(0, 162, 255, 0.74);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.Fab > svg{
+    width : fit-content;
+    height: 40px;
+}
+
+.textArea{
+    width: 100%;
+    height: 50px;
+    resize: none;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Arial', sans-serif;
+}
+
+.uploadButton{
+    position: absolute;
+    right: 0;
+    bottom: -60%;
+    background: #0073b1;
+    color: white;
+    padding-inline: 1.2rem;
+    padding-block: 0.8rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.singleCard{
+    width:100%;
+    border-radius: 10px 0px 10px 0px;
+    border-bottom: 1px solid rgb(179,179,179);
+}
+
+
+.singleCard__profileContainer{
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    padding-right: 3.4rem;
+
+}
+
+.singleCard__profileContainer > img{
+    width: 10%;
+    border-radius: 50%;
+
+}
+
+.postAuthor{
+    font-weight: bold;
+}
+
+.postUsername{
+    color: grey;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    max-width: 80%;
+}
+.singleCard__image{
+    width: 100%;
+    padding-top: 1.2rem;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.singleCard__image > img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.optionsContainer{
+    display: flex;
+    height: 20%;
+    width:100%;
+    justify-content: space-around;
+    padding-block: 0.6rem;
+}
+
+.singleOption_optionsContainer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.singleOption_optionsContainer > svg{
+    height: 100%;
+    width:8%
+}
+
+.commentsContainer{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background: rgba(0,0,0,0.7);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.allcommentsContainer{
+    width: 45vw;
+    height: 80vh;
+    background: white;
+    border-radius: 12px;
+    position: relative;
+    padding: 1.4rem;
+    padding-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.allcommentsContainer > h2 {
+    text-align: center;
+    color: #65676b;
+    margin: 2rem 0;
+}
+
+.commentsScrollWrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.commentsScrollWrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.commentsScrollWrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.commentsScrollWrapper::-webkit-scrollbar-thumb {
+    background: #0a66c2;
+    border-radius: 10px;
+}
+
+.commentsScrollWrapper::-webkit-scrollbar-thumb:hover {
+    background: #0850a8;
+}
+
+.singleComment {
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.singleComment:hover {
+    background-color: #e4e6eb;
+}
+
+.singleComment_profileContainer {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    align-items: flex-start;
+}
+
+.singleComment_profileContainer img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.singleComment_profileContainer > div {
+    flex: 1;
+}
+
+.singleComment_profileContainer p:first-child {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+    color: #050505;
+}
+
+.commentUsername {
+    color: #65676b;
+    font-size: 0.85rem;
+    margin: 0.2rem 0 0 0;
+}
+
+.commentBody {
+    color: #050505;
+    line-height: 1.5;
+    margin: 0;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+}
+
+.postCommentContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    padding: 1.2rem 1.4rem;
+    border-top: 1px solid #e5e5e5;
+    border-radius: 0 0 12px 12px;
+    z-index: 6;
+    box-sizing: border-box;
+}
+
+.postCommentContainer input {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #e5e5e5;
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.postCommentContainer input:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #0a66c2;
+    box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+}
+
+.postCommentContainer_commentBtn {
+    flex-shrink: 0;
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(135deg, #0a66c2, #0850a8);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.postCommentContainer_commentBtn:hover {
+    background: linear-gradient(135deg, #0850a8, #06398c);
+    box-shadow: 0 2px 8px rgba(10, 102, 194, 0.3);
+}
+
+.postCommentContainer_commentBtn p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Tablet Responsive - screens under 900px */
+@media screen and (max-width: 900px) {
+    .allcommentsContainer{
+        width: 60vw;
+        height: 85vh;
+    }
+    
+    .singleCard__profileContainer{
+        padding-right: 2rem;
+    }
+    
+    .wrapper{
+        max-width: 90%;
+    }
+}
+
+/* Small Tablet - screens under 768px */
+/* @media screen and (max-width: 768px) {
+    .allcommentsContainer{
+        width: 70vw;
+        padding: 1.2rem;
+        padding-bottom: 5.5rem;
+    }
+    
+    .createPostContainer {
+        height: auto !important;
+        min-height: 8svh !important;
+        padding-inline: 0.6rem !important;
+        gap: 1rem !important;
+    }
+    
+    .textArea{
+        font-size: 1rem;
+        height: 45px;
+    }
+    
+    .uploadButton{
+        padding-inline: 1rem;
+        padding-block: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .singleCard__profileContainer > img{
+        width: 42px;
+        min-width: 42px;
+    }
+    
+    .singleOption_optionsContainer > svg{
+        width: 10%;
+    }
+} */
+
+/* Mobile/Tablet Landscape - screens around 600px */
+@media screen and (max-width: 600px) {
+    .allcommentsContainer{
+        width: 85vw;
+        height: 90vh;
+        padding: 1rem;
+        padding-bottom: 5rem;
+    }
+    
+    .createPostContainer {
+        padding-inline: 0.5rem;
+        gap: 0.8rem;
+        border-radius: 15px;
+    }
+    
+    .textArea{
+        font-size: 0.95rem;
+        height: 40px;
+        padding: 0.4rem;
+    }
+    
+    .uploadButton{
+        padding-inline: 0.8rem;
+        padding-block: 0.5rem;
+        font-size: 0.8rem;
+        bottom: -50%;
+    }
+    
+    .Fab > svg{
+        height: 35px;
+    }
+    
+    .singleCard__profileContainer{
+        gap: 1rem;
+        padding: 1rem;
+        padding-right: 1.5rem;
+    }
+    
+    .singleCard__profileContainer > img{
+        width: 45px;
+        min-width: 45px;
+    }
+    
+    .wrapper{
+        gap: 1rem;
+        padding: 1rem;
+        max-width: 85%;
+    }
+    
+    .postAuthor{
+        font-size: 0.95rem;
+    }
+    
+    .postUsername{
+        font-size: 0.85rem;
+    }
+    
+    .optionsContainer{
+        padding-block: 0.5rem;
+    }
+    
+    .singleOption_optionsContainer{
+        gap: 0.6rem;
+    }
+    
+    .singleOption_optionsContainer > svg{
+        width: 12%;
+    }
+    
+    .postCommentContainer {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+    
+    .postCommentContainer input {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .postCommentContainer_commentBtn {
+        padding: 0.7rem 1.3rem;
+    }
+    
+    .postCommentContainer_commentBtn p {
+        font-size: 0.85rem;
+    }
+    
+    .singleComment {
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .singleComment_profileContainer img {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Mobile Portrait - screens under 480px */
+/* @media screen and (max-width: 480px) {
+    .allcommentsContainer{
+        width: 95vw;
+        height: 95vh;
+        padding: 0.8rem;
+        padding-bottom: 4.5rem;
+    }
+    
+    .createPostContainer {
+        height: auto;
+        min-height: 7svh;
+        padding-inline: 0.4rem;
+        gap: 0.6rem;
+        border-radius: 12px;
+    }
+    
+    .userProfile{
+        height: 50%;
+    }
+    
+    .textArea{
+        font-size: 0.9rem;
+        height: 36px;
+        padding: 0.3rem;
+    }
+    
+    .uploadButton{
+        padding-inline: 0.6rem;
+        padding-block: 0.4rem;
+        font-size: 0.75rem;
+        bottom: -45%;
+    }
+    
+    .Fab > svg{
+        height: 30px;
+    }
+    
+    .singleCard{
+        border-radius: 8px 0px 8px 0px;
+    }
+    
+    .singleCard__profileContainer{
+        gap: 0.8rem;
+        padding: 0.8rem;
+        padding-right: 1rem;
+    }
+    
+    .singleCard__profileContainer > img{
+        width: 40px;
+        min-width: 40px;
+    }
+    
+    .wrapper{
+        gap: 0.8rem;
+        padding: 0.8rem;
+        max-width: 90%;
+    }
+    
+    .postAuthor{
+        font-size: 0.9rem;
+    }
+    
+    .postUsername{
+        font-size: 0.8rem;
+    }
+    
+    .commentBody {
+        font-size: 0.9rem;
+    }
+    
+    .singleCard__image{
+        padding-top: 0.8rem;
+    }
+    
+    .optionsContainer{
+        padding-block: 0.4rem;
+    }
+    
+    .singleOption_optionsContainer{
+        gap: 0.4rem;
+        font-size: 0.85rem;
+    }
+    
+    .singleOption_optionsContainer > svg{
+        width: 15%;
+    }
+    
+    .postCommentContainer {
+        padding: 0.8rem;
+        gap: 0.6rem;
+    }
+    
+    .postCommentContainer input {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .postCommentContainer_commentBtn {
+        padding: 0.6rem 1rem;
+    }
+    
+    .postCommentContainer_commentBtn p {
+        font-size: 0.8rem;
+    }
+    
+    .singleComment {
+        padding: 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .singleComment_profileContainer {
+        gap: 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .singleComment_profileContainer img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .singleComment_profileContainer p:first-child {
+        font-size: 0.9rem;
+    }
+    
+    .commentUsername {
+        font-size: 0.8rem;
+    }
+} */

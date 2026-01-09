@@ -1,0 +1,302 @@
+.container {
+    display: flex;
+    justify-content: center;
+    height: 90svh;
+    align-items: center;
+    background: snow;
+}
+
+.cardContainer {
+  height: 80svh;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 80vw;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 10px 10px 10px rgb(173,173,173);
+}
+
+.cardContainer__left {
+    flex: 0.5;
+    padding: 2rem;
+    text-align: center;
+}
+
+.inputField {
+    padding-inline: 1.3rem;
+    padding-block: 0.8rem;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width : 100%;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 1.3rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.inputRow{
+    width: fit-content;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+
+.buttonWithOutline {
+    padding: 0.8rem 2rem;
+    border: none;
+    background: #00488b;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cardContainer__right {
+    flex: 0.4;
+    background: #00488b;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding-inline: 1.2rem;
+}
+
+
+.cardLeft_heading{
+    font-size: 1.5rem;
+    font-weight: bold;
+    
+}
+
+/* Tablet Responsive - screens under 1024px */
+@media screen and (max-width: 1024px) {
+    .cardContainer {
+        height: 75svh;
+        width: 85vw;
+    }
+    
+    .cardContainer__left {
+        flex: 0.5;
+        padding: 1.8rem;
+    }
+    
+    .cardContainer__right {
+        flex: 0.5;
+        padding-inline: 1rem;
+        gap: 1rem;
+    }
+    
+    .inputContainer {
+        gap: 1.3rem;
+        padding-top: 1rem;
+        max-width: 350px;
+    }
+    
+    .cardLeft_heading{
+        font-size: 1.3rem;
+    }
+    
+    .buttonWithOutline {
+        padding: 0.7rem 1.8rem;
+    }
+}
+
+/* Small Tablet - screens under 768px */
+@media screen and (max-width: 768px) {
+    .container {
+        height: auto;
+        min-height: 100svh;
+        padding: 1rem 0;
+    }
+    
+    .cardContainer {
+        height: auto;
+        width: 90vw;
+        flex-direction: column;
+        border-radius: 8px;
+    }
+    
+    .cardContainer__left {
+        flex: 1;
+        padding: 1.5rem;
+        order: 1;
+    }
+    
+    .cardContainer__right {
+        flex: 1;
+        padding: 1.5rem;
+        order: 2;
+        gap: 0.8rem;
+    }
+    
+    .inputField {
+        padding-inline: 1rem;
+        padding-block: 0.7rem;
+        font-size: 0.95rem;
+    }
+    
+    .inputContainer {
+        gap: 1.2rem;
+        padding-top: 0.8rem;
+        max-width: 100%;
+    }
+    
+    .inputRow{
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .cardLeft_heading{
+        font-size: 1.2rem;
+    }
+    
+    .buttonWithOutline {
+        padding: 0.6rem 1.6rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile/Tablet Landscape - screens around 600px */
+@media screen and (max-width: 600px) {
+    .container {
+        height: auto;
+        min-height: 100svh;
+        padding: 0.8rem 0;
+    }
+    
+    .cardContainer {
+        height: auto;
+        width: 95vw;
+        flex-direction: column;
+        border-radius: 8px;
+        box-shadow: 8px 8px 8px rgb(173,173,173);
+    }
+    
+    .cardContainer__left {
+        flex: 1;
+        padding: 1.2rem;
+        order: 1;
+    }
+    
+    .cardContainer__right {
+        flex: 1;
+        padding: 1.2rem;
+        order: 2;
+        gap: 0.6rem;
+    }
+    
+    .inputField {
+        padding-inline: 0.9rem;
+        padding-block: 0.6rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+    
+    .inputContainer {
+        gap: 1rem;
+        padding-top: 0.6rem;
+        max-width: 100%;
+    }
+    
+    .inputRow{
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .inputRow input {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .cardLeft_heading{
+        font-size: 1.1rem;
+    }
+    
+    .buttonWithOutline {
+        padding: 0.6rem 1.4rem;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+}
+
+/* Mobile Portrait - screens under 480px */
+@media screen and (max-width: 480px) {
+    .container {
+        height: auto;
+        min-height: 100svh;
+        padding: 0.5rem 0;
+        background: snow;
+    }
+    
+    .cardContainer {
+        height: auto;
+        width: 96vw;
+        flex-direction: column;
+        border-radius: 6px;
+        box-shadow: 6px 6px 6px rgb(173,173,173);
+    }
+    
+    .cardContainer__left {
+        flex: 1;
+        padding: 1rem;
+        order: 1;
+    }
+    
+    .cardContainer__right {
+        flex: 1;
+        padding: 1rem;
+        order: 2;
+        gap: 0.5rem;
+    }
+    
+    .inputField {
+        padding-inline: 0.8rem;
+        padding-block: 0.5rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+    
+    .inputContainer {
+        gap: 0.9rem;
+        padding-top: 0.5rem;
+        max-width: 100%;
+    }
+    
+    .inputRow{
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .inputRow input {
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    .cardLeft_heading{
+        font-size: 1rem;
+    }
+    
+    .buttonWithOutline {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.85rem;
+        width: 100%;
+        border-radius: 8px;
+    }
+}
