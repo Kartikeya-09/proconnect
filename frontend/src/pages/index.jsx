@@ -18,7 +18,7 @@ export default function Home() {
         
         <div className={styles.mainContainer__left}>
 
-      <p>Connect with friends and the world around you on LinkedIn</p>
+      <p >Connect with friends and the world around you on LinkedIn</p>
       
       <p>Join groups, share updates, and build your professional network.</p>
 
