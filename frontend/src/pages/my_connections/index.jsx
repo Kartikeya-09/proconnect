@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import UserLayout from '@/layout/UserLayout'
-import DashBoardLayout from '@/layout/DashBoardLayout'
-import { acceptConnectionRequest, getMyConnectionsReqests } from '@/config/redux/action/authAction';
-import { baseURL } from '@/config';
-import styles from "./index.module.css";
-import { useRouter } from 'next/router';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import UserLayout from "@/layout/UserLayout";
+import DashBoardLayout from "@/layout/DashBoardLayout";
+import {
+  acceptConnectionRequest,
+  getMyConnectionsReqests,
+} from "@/config/redux/action/authAction";
+import { baseURL } from "@/config";
+import { useRouter } from "next/router";
 export default function MyConnectionsPage() {
     const dispatch = useDispatch();
     const router = useRouter();
@@ -25,57 +27,112 @@ export default function MyConnectionsPage() {
      <UserLayout>
 
       <DashBoardLayout>
-      <div style={{display:"flex" , flexDirection:"column", gap:"1.7rem"}}>
-        <h4>My Connection Requests</h4>
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[color:var(--muted)]">
+                Requests
+              </p>
+              <h4 className="font-display text-2xl">My Connection Requests</h4>
+            </div>
+            <span className="rounded-full border border-subtle bg-white px-4 py-2 text-xs font-semibold text-[color:var(--muted)]">
+              {authState.connectionRequests.filter(
+                (connection) => connection.staus_accepted === null
+              ).length || 0}
+            </span>
+          </div>
 
           {authState.connectionRequests.length === 0 && (
-            <p>No connection requests at the moment.</p>
+            <p className="text-sm text-[color:var(--muted)]">
+              No connection requests at the moment.
+            </p>
           )}
 
-          {Array.isArray(authState.connectionRequests) && authState.connectionRequests.filter((connection)=> connection.staus_accepted === null).map((user) => (
-            <div key={user._id} onClick={()=>{
-              router.push(`/view_profile/${user.userId.username}`)
-            }}  className={styles.userCard} >
-              <div style={{display:"flex" , alignItems:"center"  ,gap:"1.2rem" , justifyContent:"space-between"}}>
-                <div className={styles.profilePicture}>
-                  <img src={`${baseURL}/${user.userId?.profilePicture }`} alt="" />
-                </div>
-                <div className={styles.userInfo}>
-                    <h3>{user.userId?.name }</h3>
-                    <p>@{user.userId?.username }</p>
-                </div>
-                <button onClick={(e)=>{
-                  e.stopPropagation();
-                  dispatch(acceptConnectionRequest({
-                    connectionId: user._id,
-                    token: localStorage.getItem("token"),
-                    action: "accept"
-                  }))
-                }} className={styles.connectedButton}>Accept</button>
-              </div>
-            </div>
-          ))}
-
-        <h4>My Network</h4>
-
-          {authState.connectionRequests.filter((connection)=> connection.staus_accepted !== null).map((user,index)=>{
-            return (
-             <div key={user._id} onClick={()=>{
-              router.push(`/view_profile/${user.userId.username}`)
-            }}  className={styles.userCard} >
-              <div style={{display:"flex" , alignItems:"center"  ,gap:"1.2rem" , justifyContent:"space-between"}}>
-                <div className={styles.profilePicture}>
-                  <img src={`${baseURL}/${user.userId?.profilePicture }`} alt="" />
-                </div>
-                <div className={styles.userInfo}>
-                    <h3>{user.userId?.name }</h3>
-                    <p>@{user.userId?.username }</p>
-                </div>
-              </div>
-            </div>
-            )
-          })}
+          {Array.isArray(authState.connectionRequests) &&
+            authState.connectionRequests
+              .filter((connection) => connection.staus_accepted === null)
+              .map((user) => (
+                <button
+                  key={user._id}
+                  onClick={() => {
+                    router.push(`/view_profile/${user.userId.username}`);
+                  }}
+                  className="flex w-full items-center justify-between gap-4 rounded-2xl border border-subtle bg-white p-4 text-left shadow-sm"
+                >
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={`${baseURL}/${user.userId?.profilePicture}`}
+                      alt=""
+                      className="h-12 w-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <h3 className="text-base font-semibold">
+                        {user.userId?.name}
+                      </h3>
+                      <p className="text-sm text-[color:var(--muted)]">
+                        @{user.userId?.username}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      dispatch(
+                        acceptConnectionRequest({
+                          connectionId: user._id,
+                          token: localStorage.getItem("token"),
+                          action: "accept",
+                        })
+                      );
+                    }}
+                    className="rounded-full bg-[linear-gradient(120deg,#0ea5e9,#f97316)] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-orange-500/20"
+                  >
+                    Accept
+                  </button>
+                </button>
+              ))}
         </div>
+
+        <div className="space-y-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[color:var(--muted)]">
+              Network
+            </p>
+            <h4 className="font-display text-2xl">My Network</h4>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {authState.connectionRequests
+              .filter((connection) => connection.staus_accepted !== null)
+              .map((user) => {
+                return (
+                  <button
+                    key={user._id}
+                    onClick={() => {
+                      router.push(`/view_profile/${user.userId.username}`);
+                    }}
+                    className="flex items-center gap-4 rounded-2xl border border-subtle bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5"
+                  >
+                    <img
+                      src={`${baseURL}/${user.userId?.profilePicture}`}
+                      alt=""
+                      className="h-12 w-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <h3 className="text-base font-semibold">
+                        {user.userId?.name}
+                      </h3>
+                      <p className="text-sm text-[color:var(--muted)]">
+                        @{user.userId?.username}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+          </div>
+        </div>
+      </div>
       </DashBoardLayout>
         
       

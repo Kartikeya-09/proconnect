@@ -1,12 +1,10 @@
 import { getAboutUser } from "@/config/redux/action/authAction";
-import { getAllPosts, getUserPost } from "@/config/redux/action/postAction";
+import { getAllPosts } from "@/config/redux/action/postAction";
 import DashBoardLayout from "@/layout/DashBoardLayout";
 import UserLayout from "@/layout/UserLayout";
-import React, { use, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import styles from "./index.module.css";
 import { baseURL, clientServer } from "@/config";
 
 const ProfilePage = () => {
@@ -87,13 +85,20 @@ const ProfilePage = () => {
     <UserLayout>
       <DashBoardLayout>
         {authState.user && userProfile.userId && (
-          <div className={styles.container}>
-            <div className={styles.backDropContainer}>
+          <div className="space-y-8">
+            <div className="relative rounded-3xl border border-subtle bg-white pb-12 shadow-sm">
+              <div
+                className="h-52 bg-cover bg-center"
+                style={{
+                  backgroundImage:
+                    "url(https://t4.ftcdn.net/jpg/06/31/31/59/360_F_631315988_31FMZC4kDYijIJzsxNQivlot4GeHow.jpg)",
+                }}
+              />
               <label
                 htmlFor="profilePictureUpload"
-                className={styles.backDrop__overlay}
+                className="absolute left-6 top-[calc(100%-3.5rem)] z-20 flex h-24 w-24 items-center justify-center rounded-full bg-black/60 text-xs font-semibold text-white opacity-0 transition hover:opacity-100"
               >
-                <p>Edit</p>
+                Edit
               </label>
               <input
                 hidden
@@ -103,76 +108,67 @@ const ProfilePage = () => {
               />
               <img
                 src={`${baseURL}/${userProfile.userId.profilePicture}`}
-                alt="backdrop"
-                className={styles.backDropImage}
+                alt="profile"
+                className="absolute left-6 top-[calc(100%-3.5rem)] z-10 h-24 w-24 rounded-full border-4 border-white object-cover shadow-lg"
               />
             </div>
-            <div className={styles.profileContainer_details}>
-              <div style={{ display: "flex", gap: "0.7rem" }}>
-                <div style={{ flex: "0.8" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      width: "fit-content",
-                      gap: "1rem",
+
+            <div className="flex flex-col gap-8 lg:flex-row">
+              <div className="flex-1 space-y-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <input
+                    className="font-display text-2xl font-semibold outline-none"
+                    type="text"
+                    value={userProfile.userId.name}
+                    onChange={(e) => {
+                      setUserProfile({
+                        ...userProfile,
+                        userId: {
+                          ...userProfile.userId,
+                          name: e.target.value,
+                        },
+                      });
                     }}
-                  >
-                    <input
-                      className={styles.nameEdit}
-                      type="text"
-                      value={userProfile.userId.name}
-                      onChange={(e) => {
-                        setUserProfile({
-                          ...userProfile,
-                          userId: {
-                            ...userProfile.userId,
-                            name: e.target.value,
-                          },
-                        });
-                      }}
-                    />
+                  />
 
-                    <p style={{ color: "grey" }}>
-                      @{userProfile.userId.username}
-                    </p>
-                  </div>
-
-                  <div style={{ border: "none" }}>
-                    <textarea
-                      id="bio"
-                      value={userProfile.bio}
-                      onChange={(e) => {
-                        setUserProfile({ ...userProfile, bio: e.target.value });
-                      }}
-                      rows={
-                        Math.max(3, Math.ceil(userProfile.bio.length / 80)) // Adjust rows based on content length
-                      }
-                      style={{ width: "100%" }}
-                    ></textarea>
-                  </div>
+                  <p className="text-sm text-[color:var(--muted)]">
+                    @{userProfile.userId.username}
+                  </p>
                 </div>
 
-                <div style={{ flex: "0.2" }}>
-                  <h3>Recent Activity</h3>
+                <textarea
+                  id="bio"
+                  value={userProfile.bio}
+                  onChange={(e) => {
+                    setUserProfile({ ...userProfile, bio: e.target.value });
+                  }}
+                  rows={Math.max(3, Math.ceil(userProfile.bio.length / 80))}
+                  className="w-full rounded-2xl border border-subtle bg-white/90 px-4 py-3 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-300/50"
+                ></textarea>
+              </div>
+
+              <div className="w-full lg:w-72">
+                <p className="text-sm font-semibold">Recent Activity</p>
+                <div className="mt-3 space-y-3">
                   {userPosts.map((post) => {
                     return (
-                      <div key={post._id} className={styles.postCard}>
-                        <div className={styles.card}>
-                          <div className={styles.card__ProfileContainer}>
-                            {post.media !== "" ? (
-                              <img
-                                src={`${baseURL}/${post.media}`}
-                                alt="post media"
-                                className={styles.postMedia}
-                              />
-                            ) : (
-                              <div
-                                style={{ width: "3.4rem", height: "3.4rem" }}
-                              ></div>
-                            )}
-                          </div>
-                          <p>{post.body}</p>
+                      <div
+                        key={post._id}
+                        className="rounded-2xl border border-subtle bg-white p-3"
+                      >
+                        <div className="flex items-center gap-3">
+                          {post.media !== "" ? (
+                            <img
+                              src={`${baseURL}/${post.media}`}
+                              alt="post media"
+                              className="h-12 w-12 rounded-xl object-cover"
+                            />
+                          ) : (
+                            <div className="h-12 w-12 rounded-xl bg-slate-100" />
+                          )}
+                          <p className="text-sm text-[color:var(--muted)]">
+                            {post.body}
+                          </p>
                         </div>
                       </div>
                     );
@@ -181,42 +177,49 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            <div className="workHistory">
-              <h4>Work History</h4>
-              <div className={styles.workHistoryContainer}>
-                {userProfile.pastWork.map((work, index) => {
-                  return (
-                    <div key={index} className={styles.workHistoryCard}>
-                      <p
-                        style={{
-                          fontWeight: "bold",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.8rem",
-                        }}
-                      >
-                        {work.company} - {work.position}
-                      </p>
-                      <p>{work.years}</p>
-                    </div>
-                  );
-                })}
-
-                <button className={styles.addWorkButton} onClick={() => {
-                  setIsModalOpen(true);
-                }}>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[color:var(--muted)]">
+                    Work
+                  </p>
+                  <h4 className="font-display text-2xl">Work History</h4>
+                </div>
+                <button
+                  className="rounded-full border border-dashed border-subtle bg-white px-4 py-2 text-xs font-semibold text-[color:var(--muted)]"
+                  onClick={() => {
+                    setIsModalOpen(true);
+                  }}
+                >
                   Add Work
                 </button>
               </div>
-            </div>
-            {userProfile != authState.user && (
-              <div
-                className={styles.updateProfileButton}
-                onClick={updateProfileData}
-              >
-                Update Profile
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {userProfile.pastWork.map((work, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="rounded-2xl border border-subtle bg-white p-4 shadow-sm"
+                    >
+                      <p className="text-sm font-semibold">
+                        {work.company} - {work.position}
+                      </p>
+                      <p className="text-xs text-[color:var(--muted)]">
+                        {work.years}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
-            )}
+            </div>
+
+            <button
+              className="rounded-full bg-[linear-gradient(120deg,#0ea5e9,#f97316)] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/20"
+              onClick={updateProfileData}
+            >
+              Update Profile
+            </button>
           </div>
         )}
 
@@ -225,41 +228,56 @@ const ProfilePage = () => {
             onClick={() => {
               setIsModalOpen(false);
             }}
-            className={styles.commentsContainer}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4"
           >
             <div
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className={styles.allCommentsContainer}
+              className="w-full max-w-lg rounded-[28px] bg-white p-6 shadow-2xl"
             >
-               <input
-                    onChange={handleWorkinputChnage}
-                    name="company"
-                    className={styles.inputField}
-                    type="text"
-                    placeholder="Enter Company Name"
-                  />
-                   <input
-                    onChange={handleWorkinputChnage}
-                    name="position"
-                    className={styles.inputField}
-                    type="text"
-                    placeholder="Enter Position"
-                  />
-                   <input
-                    onChange={handleWorkinputChnage}
-                    name="years"
-                    className={styles.inputField}
-                    type="number"
-                    placeholder="Years"
-                  />
+              <div className="space-y-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[color:var(--muted)]">
+                    Add Work
+                  </p>
+                  <h4 className="font-display text-2xl">New experience</h4>
+                </div>
+                <input
+                  onChange={handleWorkinputChnage}
+                  name="company"
+                  className="w-full rounded-xl border border-subtle bg-white/90 px-4 py-3 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-300/50"
+                  type="text"
+                  placeholder="Enter Company Name"
+                />
+                <input
+                  onChange={handleWorkinputChnage}
+                  name="position"
+                  className="w-full rounded-xl border border-subtle bg-white/90 px-4 py-3 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-300/50"
+                  type="text"
+                  placeholder="Enter Position"
+                />
+                <input
+                  onChange={handleWorkinputChnage}
+                  name="years"
+                  className="w-full rounded-xl border border-subtle bg-white/90 px-4 py-3 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-300/50"
+                  type="number"
+                  placeholder="Years"
+                />
 
-                  <div onClick={()=>{
-                    setUserProfile({...userProfile, pastWork:[...userProfile.pastWork , inputDetail]});
+                <button
+                  onClick={() => {
+                    setUserProfile({
+                      ...userProfile,
+                      pastWork: [...userProfile.pastWork, inputDetail],
+                    });
                     setIsModalOpen(false);
                   }}
-                   className={styles.updateProfileButton}>Add Work</div>
+                  className="rounded-full bg-[linear-gradient(120deg,#0ea5e9,#f97316)] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/20"
+                >
+                  Add Work
+                </button>
+              </div>
           
             </div>
           </div>
