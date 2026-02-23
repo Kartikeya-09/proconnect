@@ -59,9 +59,7 @@ export const getAboutUser =  createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-            const response = await clientServer.get('/get_user_and_profile', {
-                params: token ? { token } : undefined,
-            });
+            const response = await clientServer.post('/get_user_and_profile', token ? { token } : {});
             return thunkAPI.fulfillWithValue(response.data);    
         } catch (error) {
             const payload = error?.response?.data || error?.message || 'Failed to fetch user';

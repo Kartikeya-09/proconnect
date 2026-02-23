@@ -187,10 +187,11 @@ export const updateUserProfile = async (req, res) => {
 
 export const getUserAndProfile = async (req, res) => {
     try {
-        // Prefer token from cookie (current session), fallback to query param
+        // Prefer token from request body, fallback to cookie/query
+        const tokenFromBody = req.body?.token;
         const tokenFromCookie = req.cookies?.token;
         const tokenFromQuery = req.query?.token;
-        const token = tokenFromCookie || tokenFromQuery;
+        const token = tokenFromBody || tokenFromCookie || tokenFromQuery;
 
         if (!token) {
             return res.status(400).json({ message: 'Token is required' });
