@@ -10,13 +10,16 @@ export default function DashBoardLayout({ children }) {
 
   const dispatch = useDispatch();
 
-  // Run once on mount: check cookie for token; if missing, go to login
+  // Run once on mount: check localStorage/cookie for token; if missing, go to login
   useEffect(() => {
     // Only run in the browser; check cookie-based token
     if (typeof window !== "undefined") {
-      const hasToken = document.cookie
+      const localToken = localStorage.getItem("token");
+      const cookieToken = document.cookie
         .split("; ")
-        .some((row) => row.startsWith("token="));
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+      const hasToken = Boolean(localToken || cookieToken);
 
       if (!hasToken) {
         dispatch(setTokenIsNotThere());
@@ -24,12 +27,7 @@ export default function DashBoardLayout({ children }) {
       } else {
         dispatch(setTokenIsThere());
         // Sync token from cookie to localStorage if not already there
-        const cookieToken = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("token="))
-          ?.split("=")[1];
-
-        if (cookieToken && !localStorage.getItem("token")) {
+        if (cookieToken && !localToken) {
           localStorage.setItem("token", cookieToken);
         }
       }

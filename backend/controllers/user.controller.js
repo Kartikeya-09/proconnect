@@ -105,9 +105,11 @@ export const login = async (req, res) => {
 
         // Set a readable cookie so frontend can check it and redirect
         // Note: httpOnly is false so document.cookie can access it (tradeoff for simplicity in this flow)
+        const isProduction = process.env.NODE_ENV === 'production';
         res.cookie('token', token, {
             httpOnly: false,
-            sameSite: 'lax',
+            sameSite: isProduction ? 'none' : 'lax',
+            secure: isProduction,
             path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });

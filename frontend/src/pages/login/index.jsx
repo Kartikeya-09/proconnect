@@ -25,13 +25,15 @@ function LoginComponent() {
     }
   }, [authState.isLoggedIn]);
 
-  // On mount, if token cookie exists already, redirect away from login
+  // On mount, if token exists in localStorage or cookie, redirect away from login
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const hasToken = document.cookie
+      const localToken = localStorage.getItem("token");
+      const cookieToken = document.cookie
         .split("; ")
-        .some((row) => row.startsWith("token="));
-      if (hasToken) {
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+      if (localToken || cookieToken) {
         router.replace("/dashboard");
       }
     }
