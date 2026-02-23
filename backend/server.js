@@ -10,9 +10,9 @@ import postRouter from './routes/post.route.js';
 dotenv.config();
 const app = express();
 // CORS: allow frontend to send/receive cookies
-const FRONTEND_ORIGIN = 'https://proconnect-three.vercel.app/';
+const FRONTEND_ORIGIN = 'https://proconnect-three.vercel.app';
 app.use(cors({
-  origin: FRONTEND_ORIGIN,
+  origin: [FRONTEND_ORIGIN, `${FRONTEND_ORIGIN}/`],
   credentials: true,
 }));
 // Parse cookies
