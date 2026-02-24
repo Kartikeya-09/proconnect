@@ -9,7 +9,7 @@ import postRouter from './routes/post.route.js';
 dotenv.config();
 const app = express();
 // CORS: allow frontend origins (no cookies, token in body/localStorage)
-const FRONTEND_ORIGINS = (process.env.FRONTEND_ORIGINS || 'https://proconnect-9l65enscr-kartikeya-09s-projects.vercel.app,https://proconnect-three.vercel.app')
+const FRONTEND_ORIGINS = (process.env.FRONTEND_ORIGINS || 'https://proconnect-three.vercel.app')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
