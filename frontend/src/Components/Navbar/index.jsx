@@ -31,12 +31,7 @@ function NavbarComponent() {
             <button
               className="rounded-full bg-[linear-gradient(120deg,#0ea5e9,#f97316)] px-4 py-2 text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5"
               onClick={() => {
-                // Clear the token cookie and localStorage
-                if (typeof document !== "undefined") {
-                  document.cookie = "token=; Max-Age=0; path=/";
-                  document.cookie =
-                    "token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-                }
+                // Clear localStorage token
                 if (typeof window !== "undefined") {
                   localStorage.removeItem("token");
                 }

@@ -22,15 +22,7 @@ export const createPost = createAsyncThunk(
         try {
             const formData = new FormData();
 
-            // Read token from cookie instead of localStorage
-            const getCookie = (name) => {
-                if (typeof document === 'undefined') return null;
-                const match = document.cookie
-                  .split('; ')
-                  .find((row) => row.startsWith(name + '='));
-                return match ? decodeURIComponent(match.split('=')[1]) : null;
-            };
-            const token = getCookie('token');
+                        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
             if (!token) {
                 return thunkAPI.rejectWithValue('Not authenticated');
             }
@@ -58,15 +50,7 @@ export const deletePost = createAsyncThunk(
     'post/deletePost',
     async (postId, thunkAPI) => {
         try {
-            // Read token from cookie instead of localStorage
-             const getCookie = (name) => {
-                if (typeof document === 'undefined') return null;
-                const match = document.cookie
-                    .split('; ')
-                    .find((row) => row.startsWith(name + '='));
-                return match ? decodeURIComponent(match.split('=')[1]) : null;
-            };
-            const token = getCookie('token');
+            const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
             if (!token) {
                 return thunkAPI.rejectWithValue('Not authenticated');
             }
@@ -121,14 +105,7 @@ export const postComment = createAsyncThunk(
     'post/postComment',
     async (commentData, thunkAPI) => {
         try {
-            const getCookie = (name) => {
-                if (typeof document === 'undefined') return null;
-                const match = document.cookie
-                    .split('; ')
-                    .find((row) => row.startsWith(name + '='));
-                return match ? decodeURIComponent(match.split('=')[1]) : null;
-            };
-             const token = getCookie('token');
+            const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
             const { post_id, body } = commentData;  
             const response = await clientServer.post('/comment', {

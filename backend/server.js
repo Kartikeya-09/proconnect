@@ -4,19 +4,28 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
-import cookieParser from 'cookie-parser';
 import userRouter from './routes/user.route.js';
 import postRouter from './routes/post.route.js';
 dotenv.config();
 const app = express();
-// CORS: allow frontend to send/receive cookies
-const FRONTEND_ORIGIN = 'https://proconnect-three.vercel.app';
-app.use(cors({
-  origin: [FRONTEND_ORIGIN, `${FRONTEND_ORIGIN}/`],
-  credentials: true,
-}));
-// Parse cookies
-app.use(cookieParser());
+// CORS: allow frontend origins (no cookies, token in body/localStorage)
+const FRONTEND_ORIGINS = (process.env.FRONTEND_ORIGINS || 'https://proconnect-9l65enscr-kartikeya-09s-projects.vercel.app,https://proconnect-three.vercel.app')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || FRONTEND_ORIGINS.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 // Parse JSON bodies BEFORE the routes so req.body is available
 app.use(express.json());
 // Serve uploaded files statically

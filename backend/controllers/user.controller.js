@@ -103,18 +103,7 @@ export const login = async (req, res) => {
         const token = crypto.randomBytes(24).toString('hex');
         await User.updateOne({ _id: user._id }, { token });
 
-        // Set a readable cookie so frontend can check it and redirect
-        // Note: httpOnly is false so document.cookie can access it (tradeoff for simplicity in this flow)
-        const isProduction = process.env.NODE_ENV === 'production';
-        res.cookie('token', token, {
-            httpOnly: false,
-            sameSite: isProduction ? 'none' : 'lax',
-            secure: isProduction,
-            path: '/',
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        });
-
-        // Also return token in response so frontend can store in localStorage
+        // Return token in response so frontend can store in localStorage
         return res.status(200).json({ message: 'User logged in successfully', token });
     } catch (error) {
         res.status(500).json({ message: 'Error logging in user', error: error?.message || error });
@@ -187,11 +176,10 @@ export const updateUserProfile = async (req, res) => {
 
 export const getUserAndProfile = async (req, res) => {
     try {
-        // Prefer token from request body, fallback to cookie/query
+        // Prefer token from request body, fallback to query
         const tokenFromBody = req.body?.token;
-        const tokenFromCookie = req.cookies?.token;
         const tokenFromQuery = req.query?.token;
-        const token = tokenFromBody || tokenFromCookie || tokenFromQuery;
+        const token = tokenFromBody || tokenFromQuery;
 
         if (!token) {
             return res.status(400).json({ message: 'Token is required' });

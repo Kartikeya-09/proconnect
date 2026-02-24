@@ -10,26 +10,18 @@ export default function DashBoardLayout({ children }) {
 
   const dispatch = useDispatch();
 
-  // Run once on mount: check localStorage/cookie for token; if missing, go to login
+  // Run once on mount: check localStorage token; if missing, go to login
   useEffect(() => {
-    // Only run in the browser; check cookie-based token
+    // Only run in the browser; check localStorage token
     if (typeof window !== "undefined") {
       const localToken = localStorage.getItem("token");
-      const cookieToken = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
-      const hasToken = Boolean(localToken || cookieToken);
+      const hasToken = Boolean(localToken);
 
       if (!hasToken) {
         dispatch(setTokenIsNotThere());
         router.push("/login");
       } else {
         dispatch(setTokenIsThere());
-        // Sync token from cookie to localStorage if not already there
-        if (cookieToken && !localToken) {
-          localStorage.setItem("token", cookieToken);
-        }
       }
     }
   }, []);
