@@ -6,7 +6,7 @@ import {
   acceptConnectionRequest,
   getMyConnectionsReqests,
 } from "@/config/redux/action/authAction";
-import { baseURL } from "@/config";
+import { resolveMediaUrl } from "@/utils/resolveMediaUrl";
 import { useRouter } from "next/router";
 export default function MyConnectionsPage() {
     const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export default function MyConnectionsPage() {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={`${baseURL}/${user.userId?.profilePicture}`}
+                      src={resolveMediaUrl(user.userId?.profilePicture)}
                       alt=""
                       className="h-12 w-12 rounded-full object-cover"
                     />
@@ -115,7 +115,7 @@ export default function MyConnectionsPage() {
                     className="flex items-center gap-4 rounded-2xl border border-subtle bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5"
                   >
                     <img
-                      src={`${baseURL}/${user.userId?.profilePicture}`}
+                      src={resolveMediaUrl(user.userId?.profilePicture)}
                       alt=""
                       className="h-12 w-12 rounded-full object-cover"
                     />

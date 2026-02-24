@@ -2,6 +2,7 @@ import Post from '../models/post.model.js';
 import Comment from '../models/comment.model.js';
 // import Profile from '../models/profile.model';
 import User from '../models/user.model.js';
+import { uploadBuffer } from '../utils/cloudinary.js';
 
 
 
@@ -17,11 +18,24 @@ export const createPost = async (req, res) => {
     if(!user){
       return res.status(404).json({message: "user not found"});
     }
+    let mediaUrl = "";
+    let fileType = "";
+
+    if (req.file) {
+      const result = await uploadBuffer(req.file.buffer, {
+        folder: 'proconnect/posts',
+        resource_type: 'auto',
+      });
+
+      mediaUrl = result.secure_url || "";
+      fileType = result.format || req.file.mimetype?.split("/")[1] || "";
+    }
+
     const post  = new Post({
       userId: user._id,
       body: req.body.body,
-      media: req.file != undefined ? req.file.filename : "",
-      fileType: req.file != undefined ? req.file.mimetype.split("/")[1] : "",
+      media: mediaUrl,
+      fileType: fileType,
     })
 
     await post.save();

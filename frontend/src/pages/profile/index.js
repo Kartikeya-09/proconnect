@@ -5,7 +5,8 @@ import UserLayout from "@/layout/UserLayout";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { baseURL, clientServer } from "@/config";
+import { clientServer } from "@/config";
+import { resolveMediaUrl } from "@/utils/resolveMediaUrl";
 
 const ProfilePage = () => {
   const authState = useSelector((state) => state.auth);
@@ -107,7 +108,7 @@ const ProfilePage = () => {
                 onChange={(e) => updateProfilePicture(e.target.files[0])}
               />
               <img
-                src={`${baseURL}/${userProfile.userId.profilePicture}`}
+                src={resolveMediaUrl(userProfile.userId.profilePicture)}
                 alt="profile"
                 className="absolute left-6 top-[calc(100%-3.5rem)] z-10 h-24 w-24 rounded-full border-4 border-white object-cover shadow-lg"
               />
@@ -159,7 +160,7 @@ const ProfilePage = () => {
                         <div className="flex items-center gap-3">
                           {post.media !== "" ? (
                             <img
-                              src={`${baseURL}/${post.media}`}
+                              src={resolveMediaUrl(post.media)}
                               alt="post media"
                               className="h-12 w-12 rounded-xl object-cover"
                             />

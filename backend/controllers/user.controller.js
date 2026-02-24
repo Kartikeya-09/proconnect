@@ -6,6 +6,7 @@ import connectionRequst from '../models/connection.model.js';
 import PDFDoucument from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
+import { uploadBuffer } from '../utils/cloudinary.js';
 
 
 // Utility function to convert user data to PDF..
@@ -19,10 +20,14 @@ const convertUserDataToPdf = async (userData) => {
     
     // Add profile picture if it exists
     if (userData.userId && userData.userId.profilePicture) {
-        try {
-            doc.image(`uploads/${userData.userId.profilePicture}`, {align: "center", width: 100 });
-        } catch (error) {
-            console.log('Profile picture not found, skipping image');
+        const profilePicture = userData.userId.profilePicture;
+        if (!profilePicture.startsWith('http')) {
+            try {
+                const localPath = path.resolve(process.cwd(), profilePicture);
+                doc.image(localPath, { align: "center", width: 100 });
+            } catch (error) {
+                console.log('Profile picture not found, skipping image');
+            }
         }
     }
 
@@ -124,17 +129,20 @@ export const uploadprofilepicture = async (req, res) => {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    // Multer places the uploaded file on req.file when using upload.single('profile_picture')
-    if (!req.file) {
+        // Multer places the uploaded file on req.file when using upload.single('profile_picture')
+        if (!req.file) {
       return res.status(400).json({ message: 'profile_picture file is required' });
     }
 
-    // Save relative path to the file so it can be served statically
-    const relativePath = `uploads/${req.file.filename}`;
-    user.profilePicture = relativePath;
+        const result = await uploadBuffer(req.file.buffer, {
+                folder: 'proconnect/profile_pictures',
+                resource_type: 'image',
+        });
+
+        user.profilePicture = result.secure_url;
     await user.save();
 
-    return res.status(200).json({ message: 'Profile picture updated successfully', profilePicture: relativePath });
+        return res.status(200).json({ message: 'Profile picture updated successfully', profilePicture: result.secure_url });
     } catch (error) {
         res.status(500).json({ message: 'Error uploading profile picture', error: error?.message || error });
     }

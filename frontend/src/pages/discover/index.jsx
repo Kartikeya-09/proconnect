@@ -1,5 +1,5 @@
 import React from "react";
-import { baseURL } from "@/config";
+import { resolveMediaUrl } from "@/utils/resolveMediaUrl";
 import UserLayout from "@/layout/UserLayout";
 import { useEffect } from "react";
 import DashBoardLayout from "@/layout/DashBoardLayout";
@@ -55,7 +55,7 @@ export default function DiscoverPage() {
                     className="flex items-center gap-4 rounded-2xl border border-subtle bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5"
                   >
                     <img
-                      src={`${baseURL}/${profilePicture}`}
+                      src={resolveMediaUrl(profilePicture)}
                       alt="profile"
                       className="h-14 w-14 rounded-full object-cover"
                     />

@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { getAboutUser, getAllUsers } from "@/config/redux/action/authAction";
 import React, { useEffect, useState } from "react";
 
-import { baseURL } from "@/config";
+import { resolveMediaUrl } from "@/utils/resolveMediaUrl";
 import { useDispatch, useSelector } from "react-redux";
 import UserLayout from "@/layout/UserLayout";
 import DashBoardLayout from "@/layout/DashBoardLayout";
@@ -63,7 +63,7 @@ function Dashboard() {
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                 <img
                   className="h-12 w-12 rounded-full object-cover ring-2 ring-white"
-                  src={`${baseURL}/${authState.user?.userId?.profilePicture || ""}`}
+                  src={resolveMediaUrl(authState.user?.userId?.profilePicture || "")}
                   alt="profile"
                 />
                 <textarea
@@ -133,7 +133,7 @@ function Dashboard() {
                       <div className="flex flex-col gap-4 sm:flex-row">
                         <img
                           className="h-12 w-12 rounded-full object-cover"
-                          src={`${baseURL}/${postUser?.profilePicture || ""}`}
+                          src={resolveMediaUrl(postUser?.profilePicture || "")}
                           alt="profile"
                         />
                         <div className="flex-1">
@@ -178,7 +178,7 @@ function Dashboard() {
                           {post?.media && (
                             <div className="mt-4 overflow-hidden rounded-2xl border border-subtle">
                               <img
-                                src={`${baseURL}/${post.media}`}
+                                src={resolveMediaUrl(post.media)}
                                 alt=""
                                 className="w-full object-cover"
                               />
@@ -307,7 +307,7 @@ function Dashboard() {
                         >
                           <div className="flex gap-3">
                             <img
-                              src={`${baseURL}/${comment.userId?.profilePicture || ""}`}
+                              src={resolveMediaUrl(comment.userId?.profilePicture || "")}
                               alt="profile"
                               className="h-10 w-10 rounded-full object-cover"
                             />

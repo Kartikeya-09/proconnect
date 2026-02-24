@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import UserLayout from "@/layout/UserLayout";
 import DashBoardLayout from "@/layout/DashBoardLayout";
 import React from "react";
-import { baseURL } from "@/config";
+import { resolveMediaUrl } from "@/utils/resolveMediaUrl";
 import { getAllPosts } from "@/config/redux/action/postAction";
 import {
   sendConnectionRequest,
@@ -87,7 +87,7 @@ const viewProfilePage = ({ userProfile }) => {
               }}
             />
             <img
-              src={`${baseURL}/${userProfile.userId.profilePicture}`}
+              src={resolveMediaUrl(userProfile.userId.profilePicture)}
               alt="profile"
               className="absolute left-6 top-[calc(100%-3.5rem)] z-10 h-24 w-24 rounded-full border-4 border-white object-cover shadow-lg"
             />
@@ -184,7 +184,7 @@ const viewProfilePage = ({ userProfile }) => {
                       <div className="flex items-center gap-3">
                         {post.media !== "" ? (
                           <img
-                            src={`${baseURL}/${post.media}`}
+                            src={resolveMediaUrl(post.media)}
                             alt="post media"
                             className="h-12 w-12 rounded-xl object-cover"
                           />
