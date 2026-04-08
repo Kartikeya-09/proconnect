@@ -1,6 +1,6 @@
 # ProConnect 🚀
 
-A LinkedIn-inspired professional networking platform built with the MERN stack, enabling professionals to connect, share, and grow their careers.
+A professional networking platform built with the MERN stack, enabling professionals to connect, share, and grow their careers.
 
 ## 🛠️ Tech Stack
 
